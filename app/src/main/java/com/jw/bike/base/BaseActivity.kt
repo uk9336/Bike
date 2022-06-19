@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.jw.bike.BR
 
 /**
  * Created by LJW on 2022/06/19.
@@ -28,7 +29,16 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
             lifecycleOwner = this@BaseActivity
         }
         binding.setVariable(BR.viewModel, viewModel)
+
+        // onCreate
+        onCreated(savedInstanceState)
     }
+
+    /**
+     * onCreate() 를 하위 객체로 연계, activity 의 시작을 이 메서드로 한다.
+     */
+    protected abstract fun onCreated(savedInstanceState: Bundle?)
+
 
     /**
      * ViewModel
