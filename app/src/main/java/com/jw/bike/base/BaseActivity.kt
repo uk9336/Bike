@@ -18,16 +18,13 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
 ) : AppCompatActivity() {
 
     lateinit var binding: B
-    lateinit var viewModel: VM
+    abstract val viewModel: VM
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
-        viewModel = defineViewModel().apply {
-            lifecycleOwner = this@BaseActivity
-        }
         binding.setVariable(BR.viewModel, viewModel)
 
         // onCreate

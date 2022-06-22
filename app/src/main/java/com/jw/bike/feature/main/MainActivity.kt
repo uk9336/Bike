@@ -2,7 +2,10 @@ package com.jw.bike.feature.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.webkit.*
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.jw.bike.R
 import com.jw.bike.base.BaseActivity
 import com.jw.bike.base.BaseInfo.BASE_URL
@@ -13,17 +16,23 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     R.layout.activity_main
 ) {
+    override val viewModel: MainViewModel by viewModels()
 
     override fun defineViewModel() = MainViewModel()
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        setWebview()
+
+        // WebView 설정
+        setWebView()
+        Log.d("테스트 activity", this.toString())
+        Log.d("테스트 viewModel", viewModel.toString())
     }
 
+    // WebView 설정
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setWebview() {
+    private fun setWebView() {
         binding.wv.apply {
-            webViewClient = MainWebClient()
+            webViewClient = MainWebClient(viewModel.loading)
             with(settings) {
                 javaScriptEnabled = true                     // 자바스크립트 사용 여부
                 javaScriptCanOpenWindowsAutomatically = true // 자바스크립트가 창을 자동으로 열 수 있게 할 지 여부
