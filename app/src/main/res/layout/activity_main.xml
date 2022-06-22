@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.jw.bike.MainViewModel" />
+            type="com.jw.bike.feature.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".feature.main.MainActivity">
 
         <WebView
             android:id="@+id/wv"
